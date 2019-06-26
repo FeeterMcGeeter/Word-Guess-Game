@@ -1,2 +1,81 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Russo+One|Yellowtail&display=swap');
 
+body {
+    background: #F0F0F0;
+}
+.container-whole {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title {
+    font-family: 'Audiowide', cursive;
+    font-size: 100px;
+    text-align: center;
+}
+
+.main-title h1 {
+    color: #EE1515;
+}
+
+.sub-main-title {
+    font-family: 'Yellowtail', cursive;
+    font-size: 75px;
+    width: 80%;
+    text-align: center;
+    color: #181818;
+}
+
+.nes {
+    font-family: 'Audiowide', cursive;
+    color: #EE1515;
+}
+
+.game-title {
+    border: 2px solid #000;
+    width: 50%;
+    height: 200px;
+    text-align: center;
+    background: #484848;
+}
+
+.container-game {
+    display: flex;
+}
+
+.game-image {
+    border: 2px solid #000;
+    width: 300px;
+    height: 600px;;
+    background: #484848;
+}
+
+.game-display {
+    border: 2px solid #000;
+    width: 300px;
+    height: 600px;
+    font-size: 20px;
+    text-align: center;
+    background: #484848;
+    color: #F0F0F0;
+}
+
+.game-display p {
+    padding-bottom: 50px;
+    font-family: 'Russo One', sans-serif;
+    
+}
+
+#text-directions {
+    padding-top: 30px;
+}
+/* <div class="game-display">
+    <p id="text-directions">Press any key to get started!</p>
+    <p id="wins-text">Wins</p>
+    <p>Current Word</p>
+    <p id="current-word"></p>
+    <p id="remaining-guesses">Number of Guesses Remaining</p>
+    <p id="already-guessed">Letters Already Guessed</p>
+</div> */
