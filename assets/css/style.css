@@ -18,6 +18,11 @@ body {
 
 .main-title h1 {
     color: #EE1515;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 
 .sub-main-title {
@@ -35,27 +40,35 @@ body {
 
 .game-title {
     border: 2px solid #000;
-    width: 50%;
+    width: 75%;
     height: 200px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #484848;
+    color: #F0F0F0;
+}
+
+#nes-game {
+    color: #F0F0F0;
+    font-size: 75px;
 }
 
 .container-game {
-    display: flex;
+   display: flex;
 }
 
-.game-image {
+#game-image {
     border: 2px solid #000;
     width: 300px;
-    height: 600px;;
+    height: 800px;;
     background: #484848;
 }
 
 .game-display {
     border: 2px solid #000;
     width: 300px;
-    height: 600px;
+    height: 800px;
     font-size: 20px;
     text-align: center;
     background: #484848;

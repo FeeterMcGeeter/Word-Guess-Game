@@ -1,60 +1,96 @@
-// Create the Array of words
-var words = ['contra', 'megaman', 'dodgeball', 'gradius', 'zelda'];
+// Game Counters
+var guessesLeft = 10;
+var wins = 0;  
 
-// Choose words randomnly
-var randomNumber = Math.floor(Math.random() * words.length);
-var chosenWord = words[randomNumber];
-// Create the variables 
-var wins = 0;
-var lettersRemaining = 10;
-var correct = [];
-var wrong = [];
-var underscore = [];
+// Arrays
+var gameWords = ["zelda", "contra", "megaman", "dodgeball", "gradius", "tetris", "battletoads", "castlevania", "commando", ];
 
-var totalWins = document.getElementById('wins-text');
-var replaceUnderscore = document.getElementById('current-word');
-var incorrectGuess = document.getElementById('already-guessed');
+var lettersArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                't', 'u', 'v', 'w', 'x', 'y', 'z'];
+                
+// Global Variables
+var alreadyGuessed = [];
+var hiddenWord = [];
+var currentWord; 
+var letter; 
 
+// DOM Manipulation
+var currentWordText = document.getElementById('current-word');
+var guessesLeftCount = document.getElementById('remaining-guesses'); 
+var winCount = document.getElementById('wins-text'); 
+var alreadyGuessedText = document.getElementById('already-guessed');
 
-// Create underscores based on the amount of letters in a word
+// FUNCTIONS
+function gameStart() {
+    
+    currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
+    console.log(currentWord);
 
-var letterUnderscore = () => {
-    for(var i = 0; i < chosenWord.length; i++) {
-        underscore.push('_');
+    for (var i = 0; i < currentWord.length; i++) {
+        hiddenWord.push('_');
     }
-    return underscore;
+    currentWordText.innerHTML = hiddenWord.join(" ");
 }
 
-// Get user's guess and determine whether it's correct or wrong
+function gamePlay(letter) {
 
-document.addEventListener('keypress', (event) => {
-    var keyword = String.fromCharCode(event.keyCode);
+    if (lettersArray.indexOf(letter) == -1) {
+        alert("Please pick a letter!");
 
-    // This determines if the user is correct or not and places the letter accordingly
+    } else if (currentWord.indexOf(letter) == -1 && alreadyGuessed.indexOf(letter) == -1) {
+        guessesLeft--;
+        guessesLeftCount.innerHTML = guessesLeft; 
+        console.log(guessesLeft)
+        alreadyGuessed.push(letter);
+        alreadyGuessedText.innerHTML = alreadyGuessed.join(" ");
+        console.log(alreadyGuessed);
 
-    if(chosenWord.indexOf(keyword) > -1) {
-        correct.push(keyword);
-        underscore[chosenWord.indexOf(keyword)] = keyword;
-        replaceUnderscore[0].innerHTML = underscore.join('');
-        if(underscore.join('') == chosenWord) {
-            alert('You Win');
-        }
-    } else { 
-        wrong.push(keyword);
-        incorrectGuess[0].innerHTML = wrong;
+        winOrLoss();
+    } else {
+
+        for (var i = 0; i < currentWord.length; i++)
+
+            if (currentWord[i] == letter) {
+                hiddenWord[i] = currentWord[i]; 
+            }  
+        console.log(hiddenWord); 
+        currentWordText.innerHTML = hiddenWord.join(" ");
+
+        winOrLoss(); 
     }
-});
+}
 
-replaceUnderscore[0].innerHTML = letterUnderscore().join('');
+function winOrLoss() {
 
+    if (hiddenWord.indexOf('_') == -1) { 
+        document.getElementById("nes-game").innerHTML = "You Win!";
+        wins++;
+        winCount.innerHTML = wins; 
+        resetGame();
+    } else if (guessesLeft == 0) {
+        document.getElementById("nes-game").innerHTML = "Game Over";
+        resetGame();
+    }
+}
 
+function resetGame() {
 
+    guessesLeft = 9; 
+    guessesLeftCount.innerHTML = guessesLeft; 
+    alreadyGuessed = [];
+    hiddenWord = [];
+    currentWord; 
+    currentWordText.innerHTML = " ";
+    alreadyGuessedText.innerHTML = " "; 
 
+    gameStart();
+}
 
+document.onkeyup = function (event) {
 
-// If correct, push to current word being guessed
+    letter = event.key;
+    console.log(letter);   
+    gamePlay(letter);
+}
 
-// If incorrect, push to "letters guessed"
-
-// Display the amount of wins
-
+gameStart(); 
